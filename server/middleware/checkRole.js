@@ -1,15 +1,15 @@
-import { verify } from "jsonwebtoken";
+const jwt = require("jsonwebtoken");
 
-const role.middleware = (role, req, res, next) => {
+export default function (role, req, res, next) {
   if (req.method === "OPTIONS") {
     next();
   }
   try {
-    const token = req.headers.authorization.split(" ")[1];
+    const token = req.headers.authorization.split(" ")[1]; // Bearer asfasnfkajsfnjk
     if (!token) {
       return res.status(401).json({ message: "User is not authorized" });
     }
-    const decoded = verify(token, process.env.SECRET_KEY);
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
     if (decoded.role !== role) {
       return res.status(403).json({ message: "Access denied!" });
     }
@@ -19,5 +19,3 @@ const role.middleware = (role, req, res, next) => {
     res.status(401).json({ message: "User is not authorized" });
   }
 };
-
-export default role.middleware;

@@ -1,10 +1,8 @@
-import ApiError from "../error/ApiError";
+const ApiError = require("../error/ApiError");
 
-const error.middleware = (err, req, res, next) => {
+export default function (err, req, res, next) {
   if (err instanceof ApiError) {
     return res.status(err.status).json({ message: err.message });
   }
   return res.status(500).json({ message: "Unexpected error!" });
 };
-
-export default error.middleware;

@@ -1,4 +1,4 @@
-import { Type } from "../models";
+import { Type } from "../models/";
 import ApiError from "../error/ApiError";
 
 class TypeController {
